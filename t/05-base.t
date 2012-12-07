@@ -10,7 +10,8 @@ use Test::Warn;
 use YACT;
 
 my $tempdir = File::Tempdir->new;
-my $abs_tempdir = dir($tempdir)->absolute;
+
+my $abs_tempdir = dir($tempdir->name,'05-yact-test')->absolute;
 
 $ENV{YACT_ROOT} = $abs_tempdir;
 
