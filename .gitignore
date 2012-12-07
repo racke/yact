@@ -1,2 +1,4 @@
 .build
 YACT-*
+.*.swp
+*.bak
