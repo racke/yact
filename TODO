@@ -1,0 +1,71 @@
+# Public API
+
+Act's current URL schema is defined in Act::Dispatcher, which you can
+read on <https://github.com/book/Act/blob/master/lib/Act/Dispatcher.pm>.
+
+In Act, these endpoints are currently made available in the following way:
+
+   http://act.yapc.eu/{conf_id}/{handler}
+
+Please remove the different handlers from the list below as they are
+implemented.
+
+
+## Public handlers
+
+    api
+    atom
+    changepwd
+    event
+    events
+    faces
+    favtalks
+    login
+    news
+    openid
+    proceedings
+    register
+    schedule
+    search
+    stats
+    talk
+    talks
+    timetable.ics
+    user
+    wiki
+
+## Private handlers
+
+    change
+    create
+    csv
+    confirm_attend
+    editevent
+    edittalk
+    export
+    export_talks
+    ical_import
+    invoice
+    logout
+    main
+    myschedule
+    myschedule.ics
+    newevent
+    newsadmin
+    newsedit
+    newtalk
+    orders
+    openid_trust
+    payment
+    payments
+    photo
+    punregister
+    purchase
+    rights
+    trackedit
+    tracks
+    updatemytalks
+    updatemytalks_a
+    unregister
+    wikiedit
+
