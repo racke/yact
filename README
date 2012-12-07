@@ -1,0 +1,8 @@
+# Setting up the development environment
+
+dzil authordeps | cpanm
+dzil listdeps   | cpanm
+dzil test
+
+./bin/yact.pl
+
