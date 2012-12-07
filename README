@@ -4,5 +4,5 @@ dzil authordeps | cpanm
 dzil listdeps   | cpanm
 dzil test
 
-./bin/yact.pl
+./bin/yact-web.pl
 
