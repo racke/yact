@@ -39,7 +39,6 @@ get '/LOGOUT' => sub {
     redirect '/';
 };
 
-
 get '/user' => sub {
     redirect '/user/' . session->{user_id};
 };

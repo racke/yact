@@ -9,8 +9,31 @@ use Dancer::Test;
 route_exists [ GET => '/' ], 'a route handler is defined for /';
 response_status_is [ 'GET' => '/' ], 200, 'response status is 200 for /';
 
+route_exists [ GET => '/LOGIN' ], 'a route handler is defined for /LOGIN';
+response_status_is [ GET => '/LOGIN' ], 200,
+    'response status is 200 for /LOGIN';
+
+route_exists [ GET => '/LOGOUT' ], 'a route handler is defined for /LOGOUT';
+response_status_is [ GET => '/LOGOUT' ], 200,
+    'response status is 200 for /LOGOUT';
+
 TODO: {
     local ($TODO) = "Not yet implemented";
+
+    route_exists [ GET => '/main' ], 'a route handler is defined for /main';
+    response_status_is [ GET => '/main' ], 200,
+        'response status is 200 for /main';
+
+    # /user -> /user/{user_id}
+    route_exists [ GET => '/user' ], 'a route handler is defined for /user';
+    response_status_is [ GET => '/user' ], 304,
+        'response status is 304 for /user';
+
+    # /photo -> /user/{user_id}/photo
+    route_exists [ GET => '/photo' ], 'a route handler is defined for /photo';
+    response_status_is [ GET => '/photo' ], 304,
+        'response status is 304 for /photo';
+
     route_exists [ GET => '/wikiedit' ],
         'a route handler is defined for /wikiedit';
     response_status_is [ GET => '/wikiedit' ], 200,
@@ -18,9 +41,6 @@ TODO: {
     route_exists [ GET => '/wiki' ], 'a route handler is defined for /wiki';
     response_status_is [ GET => '/wiki' ], 200,
         'response status is 200 for /wiki';
-    route_exists [ GET => '/user' ], 'a route handler is defined for /user';
-    response_status_is [ GET => '/user' ], 200,
-        'response status is 200 for /user';
     route_exists [ GET => '/updatemytalks' ],
         'a route handler is defined for /updatemytalks';
     response_status_is [ GET => '/updatemytalks' ], 200,
@@ -82,9 +102,6 @@ TODO: {
         'a route handler is defined for /proceedings';
     response_status_is [ GET => '/proceedings' ], 200,
         'response status is 200 for /proceedings';
-    route_exists [ GET => '/photo' ], 'a route handler is defined for /photo';
-    response_status_is [ GET => '/photo' ], 200,
-        'response status is 200 for /photo';
     route_exists [ GET => '/payments' ],
         'a route handler is defined for /payments';
     response_status_is [ GET => '/payments' ], 200,
@@ -132,16 +149,6 @@ TODO: {
         'a route handler is defined for /myschedule';
     response_status_is [ GET => '/myschedule' ], 200,
         'response status is 200 for /myschedule';
-    route_exists [ GET => '/main' ], 'a route handler is defined for /main';
-    response_status_is [ GET => '/main' ], 200,
-        'response status is 200 for /main';
-    route_exists [ GET => '/logout' ],
-        'a route handler is defined for /logout';
-    response_status_is [ GET => '/logout' ], 200,
-        'response status is 200 for /logout';
-    route_exists [ GET => '/login' ], 'a route handler is defined for /login';
-    response_status_is [ GET => '/login' ], 200,
-        'response status is 200 for /login';
     route_exists [ GET => '/invoice' ],
         'a route handler is defined for /invoice';
     response_status_is [ GET => '/invoice' ], 200,

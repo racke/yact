@@ -6,7 +6,7 @@ use Moo;
 use YACT::Config;
 use YACT::DB;
 
-sub BUILD {}
+sub BUILD { }
 
 has config => (
     is      => 'ro',
@@ -25,15 +25,16 @@ sub init {
     my ($self) = @_;
     unless ( -d $self->config->root ) {
         mkdir $self->config->root;
-    } else {
+    }
+    else {
         die "YACT_ROOT already exist";
     }
     $self->db->deploy;
 }
 
 has db => (
-    is => 'ro',
-    lazy => 1,
+    is      => 'ro',
+    lazy    => 1,
     builder => 1,
 );
 
@@ -42,8 +43,8 @@ sub _build_db {
     YACT::DB->connect($self);
 }
 
-sub usercount { shift->db->resultset('User')->search({})->count }
+sub usercount { shift->db->resultset('User')->search( {} )->count }
 
-sub get_user { shift->db->resultset('User')->find({ login => shift }) }
+sub get_user { shift->db->resultset('User')->find( { login => shift } ) }
 
 1;

@@ -1,4 +1,5 @@
 package YACT::Config;
+
 # ABSTRACT: Configuration class for YACT
 
 use Moo;
@@ -27,6 +28,7 @@ sub _build_db_dsn {
 }
 
 has db_user => ( is => 'ro', lazy => 1, builder => 1, );
+
 sub _build_db_user {
     defined $ENV{'YACT_DB_USER'} ? $ENV{'YACT_DB_USER'} : '';
 }
