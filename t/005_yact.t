@@ -6,22 +6,19 @@ use Test::More;
 use Path::Class;
 use File::Tempdir;
 use Test::Warn;
+use FindBin;
+use lib "$FindBin::Bin/lib";
 
-use YACT;
+use YACTTest;
 
-my $tempdir = File::Tempdir->new;
+my $yacttest = YACTTest->new;
 
-my $abs_tempdir = dir( $tempdir->name, '05-yact-test' )->absolute;
+$yacttest->init;
 
-$ENV{YACT_ROOT} = $abs_tempdir;
-
-my $yact;
-
-warning_is {
-    $yact = YACT->new;
-}
-"YACT_ROOT doesn't exist - creating it";
-
-is( $yact->root, $abs_tempdir, 'Checking root directory' );
+ok( -d $yacttest->testdir, 'Checking if dir was successful created' );
+is( $yacttest->yact->root, $yacttest->testdir, 'Checking root directory be where expected' );
+is( $yacttest->yact->usercount, 8, 'Checking for expected test user count' );
+is( $yacttest->yact->get_user('test1')->email, 'test@act.yapc.eu', 'Checking test1 for right email' );
+ok( $yacttest->yact->get_user('test1')->check_passwd('test1'), 'Checking test1 password' );
 
 done_testing;

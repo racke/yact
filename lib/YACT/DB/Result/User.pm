@@ -177,7 +177,14 @@ primary_column "user_id",
 
 column "login", { data_type => "text", is_nullable => 0 };
 
-column "passwd", { data_type => "text", is_nullable => 0 };
+column "passwd", {
+  data_type => "text",
+  is_nullable => 0,
+  encode_column => 1,
+  encode_class  => 'Digest',
+  encode_args   => { algorithm => 'MD5', format => 'base64' },
+  encode_check_method => 'check_passwd',
+};
 
 column "session_id", { data_type => "text", is_nullable => 1 };
 

@@ -1,4 +1,5 @@
 package YACT::Config;
+# ABSTRACT: Configuration class for YACT
 
 use Moo;
 use Path::Class;
