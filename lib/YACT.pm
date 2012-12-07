@@ -6,9 +6,12 @@ use Moo;
 use YACT::Config;
 
 has config => (
-    is      => 'ro',
-    lazy    => 1,
-    builder => 1,
+	is => 'ro',
+	lazy => 1,
+	builder => 1,
+	handles => [qw(
+		root
+	)],
 );
 
 sub _build_config { YACT::Config->new }
