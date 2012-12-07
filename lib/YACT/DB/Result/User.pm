@@ -6,7 +6,10 @@ YACT::DB::Result::User
 
 =cut
 
-use DBIx::Class::Candy -components => [ 'TimeStamp', 'InflateColumn::DateTime', 'InflateColumn::Serializer', 'EncodedColumn' ];
+use DBIx::Class::Candy -components => [
+    'TimeStamp',                 'InflateColumn::DateTime',
+    'InflateColumn::Serializer', 'EncodedColumn'
+];
 
 =head1 TABLE: C<users>
 
@@ -164,122 +167,69 @@ table("users");
 
 =cut
 
-primary_column
-  "user_id",
-  {
+primary_column "user_id",
+    {
     data_type         => "integer",
     is_auto_increment => 1,
     is_nullable       => 0,
     sequence          => "users_user_id_seq",
-  };
+    };
 
-column
-  "login",
-  { data_type => "text", is_nullable => 0 };
+column "login", { data_type => "text", is_nullable => 0 };
 
-column
-  "passwd",
-  { data_type => "text", is_nullable => 0 };
+column "passwd", { data_type => "text", is_nullable => 0 };
 
-column
-  "session_id",
-  { data_type => "text", is_nullable => 1 };
+column "session_id", { data_type => "text", is_nullable => 1 };
 
-column
-  "salutation",
-  { data_type => "integer", is_nullable => 1 };
+column "salutation", { data_type => "integer", is_nullable => 1 };
 
-column
-  "first_name",
-  { data_type => "text", is_nullable => 1 };
+column "first_name", { data_type => "text", is_nullable => 1 };
 
-column
-  "last_name",
-  { data_type => "text", is_nullable => 1 };
+column "last_name", { data_type => "text", is_nullable => 1 };
 
-column
-  "nick_name",
-  { data_type => "text", is_nullable => 1 };
+column "nick_name", { data_type => "text", is_nullable => 1 };
 
-column
-  "pseudonymous",
-  { data_type => "boolean", default_value => \"false", is_nullable => 1 };
+column "pseudonymous",
+    { data_type => "boolean", default_value => \"false", is_nullable => 1 };
 
-column
-  "country",
-  { data_type => "text", is_nullable => 0 };
+column "country", { data_type => "text", is_nullable => 0 };
 
-column
-  "town",
-  { data_type => "text", is_nullable => 1 };
+column "town", { data_type => "text", is_nullable => 1 };
 
-column
-  "web_page",
-  { data_type => "text", is_nullable => 1 };
+column "web_page", { data_type => "text", is_nullable => 1 };
 
-column
-  "pm_group",
-  { data_type => "text", is_nullable => 1 };
+column "pm_group", { data_type => "text", is_nullable => 1 };
 
-column
-  "pm_group_url",
-  { data_type => "text", is_nullable => 1 };
+column "pm_group_url", { data_type => "text", is_nullable => 1 };
 
-column
-  "email",
-  { data_type => "text", is_nullable => 0 };
+column "email", { data_type => "text", is_nullable => 0 };
 
-column
-  "email_hide",
-  { data_type => "boolean", default_value => \"true", is_nullable => 0 };
+column "email_hide",
+    { data_type => "boolean", default_value => \"true", is_nullable => 0 };
 
-column
-  "gpg_key_id",
-  { data_type => "text", is_nullable => 1 };
+column "gpg_key_id", { data_type => "text", is_nullable => 1 };
 
-column
-  "pause_id",
-  { data_type => "text", is_nullable => 1 };
+column "pause_id", { data_type => "text", is_nullable => 1 };
 
-column
-  "monk_id",
-  { data_type => "text", is_nullable => 1 };
+column "monk_id", { data_type => "text", is_nullable => 1 };
 
-column
-  "monk_name",
-  { data_type => "text", is_nullable => 1 };
+column "monk_name", { data_type => "text", is_nullable => 1 };
 
-column
-  "im",
-  { data_type => "text", is_nullable => 1 };
+column "im", { data_type => "text", is_nullable => 1 };
 
-column
-  "photo_name",
-  { data_type => "text", is_nullable => 1 };
+column "photo_name", { data_type => "text", is_nullable => 1 };
 
-column
-  "language",
-  { data_type => "text", is_nullable => 1 };
+column "language", { data_type => "text", is_nullable => 1 };
 
-column
-  "timezone",
-  { data_type => "text", is_nullable => 0 };
+column "timezone", { data_type => "text", is_nullable => 0 };
 
-column
-  "company",
-  { data_type => "text", is_nullable => 1 };
+column "company", { data_type => "text", is_nullable => 1 };
 
-column
-  "company_url",
-  { data_type => "text", is_nullable => 1 };
+column "company_url", { data_type => "text", is_nullable => 1 };
 
-column
-  "address",
-  { data_type => "text", is_nullable => 1 };
+column "address", { data_type => "text", is_nullable => 1 };
 
-column
-  "vat",
-  { data_type => "text", is_nullable => 1 };
+column "vat", { data_type => "text", is_nullable => 1 };
 
 =head1 UNIQUE CONSTRAINTS
 
@@ -293,7 +243,7 @@ column
 
 =cut
 
-unique_constraint("users_login", ["login"]);
+unique_constraint( "users_login", ["login"] );
 
 =head2 C<users_session_id>
 
@@ -305,7 +255,7 @@ unique_constraint("users_login", ["login"]);
 
 =cut
 
-unique_constraint("users_session_id", ["session_id"]);
+unique_constraint( "users_session_id", ["session_id"] );
 
 =head1 RELATIONS
 
@@ -318,10 +268,9 @@ Related object: L<YACT::DB::Result::Order>
 =cut
 
 has_many(
-  "orders",
-  "YACT::DB::Result::Order",
-  { "foreign.user_id" => "self.user_id" },
-  { cascade_copy => 0, cascade_delete => 0 },
+    "orders", "YACT::DB::Result::Order",
+    { "foreign.user_id" => "self.user_id" },
+    { cascade_copy      => 0, cascade_delete => 0 },
 );
 
 =head2 participations
@@ -333,10 +282,10 @@ Related object: L<YACT::DB::Result::Participation>
 =cut
 
 has_many(
-  "participations",
-  "YACT::DB::Result::Participation",
-  { "foreign.user_id" => "self.user_id" },
-  { cascade_copy => 0, cascade_delete => 0 },
+    "participations",
+    "YACT::DB::Result::Participation",
+    { "foreign.user_id" => "self.user_id" },
+    { cascade_copy      => 0, cascade_delete => 0 },
 );
 
 =head2 rights
@@ -348,10 +297,9 @@ Related object: L<YACT::DB::Result::Right>
 =cut
 
 has_many(
-  "rights",
-  "YACT::DB::Result::Right",
-  { "foreign.user_id" => "self.user_id" },
-  { cascade_copy => 0, cascade_delete => 0 },
+    "rights", "YACT::DB::Result::Right",
+    { "foreign.user_id" => "self.user_id" },
+    { cascade_copy      => 0, cascade_delete => 0 },
 );
 
 =head2 talks
@@ -363,10 +311,9 @@ Related object: L<YACT::DB::Result::Talk>
 =cut
 
 has_many(
-  "talks",
-  "YACT::DB::Result::Talk",
-  { "foreign.user_id" => "self.user_id" },
-  { cascade_copy => 0, cascade_delete => 0 },
+    "talks", "YACT::DB::Result::Talk",
+    { "foreign.user_id" => "self.user_id" },
+    { cascade_copy      => 0, cascade_delete => 0 },
 );
 
 =head2 user_talks
@@ -378,10 +325,9 @@ Related object: L<YACT::DB::Result::UserTalk>
 =cut
 
 has_many(
-  "user_talks",
-  "YACT::DB::Result::UserTalk",
-  { "foreign.user_id" => "self.user_id" },
-  { cascade_copy => 0, cascade_delete => 0 },
+    "user_talks", "YACT::DB::Result::UserTalk",
+    { "foreign.user_id" => "self.user_id" },
+    { cascade_copy      => 0, cascade_delete => 0 },
 );
 
 1;

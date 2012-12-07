@@ -11,16 +11,17 @@ use YACT;
 
 my $tempdir = File::Tempdir->new;
 
-my $abs_tempdir = dir($tempdir->name,'05-yact-test')->absolute;
+my $abs_tempdir = dir( $tempdir->name, '05-yact-test' )->absolute;
 
 $ENV{YACT_ROOT} = $abs_tempdir;
 
 my $yact;
 
 warning_is {
-	$yact = YACT->new;
-} "YACT_ROOT doesn't exist - creating it";
+    $yact = YACT->new;
+}
+"YACT_ROOT doesn't exist - creating it";
 
-is($yact->root,$abs_tempdir,'Checking root directory');
+is( $yact->root, $abs_tempdir, 'Checking root directory' );
 
 done_testing;

@@ -6,7 +6,10 @@ YACT::DB::Result::InvoiceNum
 
 =cut
 
-use DBIx::Class::Candy -components => [ 'TimeStamp', 'InflateColumn::DateTime', 'InflateColumn::Serializer', 'EncodedColumn' ];
+use DBIx::Class::Candy -components => [
+    'TimeStamp',                 'InflateColumn::DateTime',
+    'InflateColumn::Serializer', 'EncodedColumn'
+];
 
 =head1 TABLE: C<invoice_num>
 
@@ -28,13 +31,9 @@ table("invoice_num");
 
 =cut
 
-column
-  "conf_id",
-  { data_type => "text", is_nullable => 0 };
+column "conf_id", { data_type => "text", is_nullable => 0 };
 
-column
-  "next_num",
-  { data_type => "integer", is_nullable => 0 };
+column "next_num", { data_type => "integer", is_nullable => 0 };
 
 =head1 PRIMARY KEY
 

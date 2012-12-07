@@ -1,4 +1,5 @@
 use utf8;
+
 package YACT::DB;
 
 use strict;

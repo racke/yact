@@ -6,7 +6,10 @@ YACT::DB::Result::Schema
 
 =cut
 
-use DBIx::Class::Candy -components => [ 'TimeStamp', 'InflateColumn::DateTime', 'InflateColumn::Serializer', 'EncodedColumn' ];
+use DBIx::Class::Candy -components => [
+    'TimeStamp',                 'InflateColumn::DateTime',
+    'InflateColumn::Serializer', 'EncodedColumn'
+];
 
 =head1 TABLE: C<schema>
 
@@ -23,8 +26,6 @@ table("schema");
 
 =cut
 
-column
-  "current_version",
-  { data_type => "integer", is_nullable => 0 };
+column "current_version", { data_type => "integer", is_nullable => 0 };
 
 1;

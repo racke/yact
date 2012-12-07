@@ -6,7 +6,10 @@ YACT::DB::Result::UserTalk
 
 =cut
 
-use DBIx::Class::Candy -components => [ 'TimeStamp', 'InflateColumn::DateTime', 'InflateColumn::Serializer', 'EncodedColumn' ];
+use DBIx::Class::Candy -components => [
+    'TimeStamp',                 'InflateColumn::DateTime',
+    'InflateColumn::Serializer', 'EncodedColumn'
+];
 
 =head1 TABLE: C<user_talks>
 
@@ -35,17 +38,13 @@ table("user_talks");
 
 =cut
 
-column
-  "user_id",
-  { data_type => "integer", is_foreign_key => 1, is_nullable => 0 };
+column "user_id",
+    { data_type => "integer", is_foreign_key => 1, is_nullable => 0 };
 
-column
-  "conf_id",
-  { data_type => "text", is_nullable => 0 };
+column "conf_id", { data_type => "text", is_nullable => 0 };
 
-column
-  "talk_id",
-  { data_type => "integer", is_foreign_key => 1, is_nullable => 0 };
+column "talk_id",
+    { data_type => "integer", is_foreign_key => 1, is_nullable => 0 };
 
 =head1 RELATIONS
 
@@ -58,10 +57,13 @@ Related object: L<YACT::DB::Result::Talk>
 =cut
 
 belongs_to(
-  "talk",
-  "YACT::DB::Result::Talk",
-  { talk_id => "talk_id" },
-  { is_deferrable => 0, on_delete => "NO ACTION", on_update => "NO ACTION" },
+    "talk",
+    "YACT::DB::Result::Talk",
+    { talk_id => "talk_id" },
+    {   is_deferrable => 0,
+        on_delete     => "NO ACTION",
+        on_update     => "NO ACTION"
+    },
 );
 
 =head2 user
@@ -73,10 +75,13 @@ Related object: L<YACT::DB::Result::User>
 =cut
 
 belongs_to(
-  "user",
-  "YACT::DB::Result::User",
-  { user_id => "user_id" },
-  { is_deferrable => 0, on_delete => "NO ACTION", on_update => "NO ACTION" },
+    "user",
+    "YACT::DB::Result::User",
+    { user_id => "user_id" },
+    {   is_deferrable => 0,
+        on_delete     => "NO ACTION",
+        on_update     => "NO ACTION"
+    },
 );
 
 1;

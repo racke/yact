@@ -6,7 +6,10 @@ YACT::DB::Result::Right
 
 =cut
 
-use DBIx::Class::Candy -components => [ 'TimeStamp', 'InflateColumn::DateTime', 'InflateColumn::Serializer', 'EncodedColumn' ];
+use DBIx::Class::Candy -components => [
+    'TimeStamp',                 'InflateColumn::DateTime',
+    'InflateColumn::Serializer', 'EncodedColumn'
+];
 
 =head1 TABLE: C<rights>
 
@@ -34,17 +37,12 @@ table("rights");
 
 =cut
 
-column
-  "right_id",
-  { data_type => "text", is_nullable => 0 };
+column "right_id", { data_type => "text", is_nullable => 0 };
 
-column
-  "conf_id",
-  { data_type => "text", is_nullable => 0 };
+column "conf_id", { data_type => "text", is_nullable => 0 };
 
-column
-  "user_id",
-  { data_type => "integer", is_foreign_key => 1, is_nullable => 0 };
+column "user_id",
+    { data_type => "integer", is_foreign_key => 1, is_nullable => 0 };
 
 =head1 RELATIONS
 
@@ -57,10 +55,13 @@ Related object: L<YACT::DB::Result::User>
 =cut
 
 belongs_to(
-  "user",
-  "YACT::DB::Result::User",
-  { user_id => "user_id" },
-  { is_deferrable => 0, on_delete => "NO ACTION", on_update => "NO ACTION" },
+    "user",
+    "YACT::DB::Result::User",
+    { user_id => "user_id" },
+    {   is_deferrable => 0,
+        on_delete     => "NO ACTION",
+        on_update     => "NO ACTION"
+    },
 );
 
 1;

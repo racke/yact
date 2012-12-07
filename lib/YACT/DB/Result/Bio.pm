@@ -6,7 +6,10 @@ YACT::DB::Result::Bio
 
 =cut
 
-use DBIx::Class::Candy -components => [ 'TimeStamp', 'InflateColumn::DateTime', 'InflateColumn::Serializer', 'EncodedColumn' ];
+use DBIx::Class::Candy -components => [
+    'TimeStamp',                 'InflateColumn::DateTime',
+    'InflateColumn::Serializer', 'EncodedColumn'
+];
 
 =head1 TABLE: C<bios>
 
@@ -23,9 +26,7 @@ table("bios");
 
 =cut
 
-column
-  "user_id",
-  { data_type => "integer", is_nullable => 1 };
+column "user_id", { data_type => "integer", is_nullable => 1 };
 
 =head2 lang
 
@@ -34,9 +35,7 @@ column
 
 =cut
 
-column
-  "lang",
-  { data_type => "text", is_nullable => 1 };
+column "lang", { data_type => "text", is_nullable => 1 };
 
 =head2 bio
 
@@ -45,9 +44,7 @@ column
 
 =cut
 
-column
-  "bio",
-  { data_type => "text", is_nullable => 1 };
+column "bio", { data_type => "text", is_nullable => 1 };
 
 =head1 UNIQUE CONSTRAINTS
 
@@ -63,6 +60,6 @@ column
 
 =cut
 
-unique_constraint("bios_idx", ["user_id", "lang"]);
+unique_constraint( "bios_idx", [ "user_id", "lang" ] );
 
 1;

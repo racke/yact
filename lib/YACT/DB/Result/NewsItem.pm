@@ -6,7 +6,10 @@ YACT::DB::Result::NewsItem
 
 =cut
 
-use DBIx::Class::Candy -components => [ 'TimeStamp', 'InflateColumn::DateTime', 'InflateColumn::Serializer', 'EncodedColumn' ];
+use DBIx::Class::Candy -components => [
+    'TimeStamp',                 'InflateColumn::DateTime',
+    'InflateColumn::Serializer', 'EncodedColumn'
+];
 
 =head1 TABLE: C<news_items>
 
@@ -46,30 +49,22 @@ table("news_items");
 
 =cut
 
-column
-  "news_item_id",
-  {
+column "news_item_id",
+    {
     data_type         => "integer",
     is_auto_increment => 1,
     is_nullable       => 0,
     sequence          => "news_items_news_item_id_seq",
-  };
+    };
 
-column
-  "news_id",
-  { data_type => "integer", is_foreign_key => 1, is_nullable => 0 };
+column "news_id",
+    { data_type => "integer", is_foreign_key => 1, is_nullable => 0 };
 
-column
-  "lang",
-  { data_type => "text", is_nullable => 0 };
+column "lang", { data_type => "text", is_nullable => 0 };
 
-column
-  "title",
-  { data_type => "text", is_nullable => 0 };
+column "title", { data_type => "text", is_nullable => 0 };
 
-column
-  "text",
-  { data_type => "text", is_nullable => 0 };
+column "text", { data_type => "text", is_nullable => 0 };
 
 =head1 PRIMARY KEY
 
@@ -97,7 +92,7 @@ primary_key("news_item_id");
 
 =cut
 
-unique_constraint("news_items_news_id_key", ["news_id", "lang"]);
+unique_constraint( "news_items_news_id_key", [ "news_id", "lang" ] );
 
 =head1 RELATIONS
 
@@ -110,10 +105,13 @@ Related object: L<YACT::DB::Result::News>
 =cut
 
 belongs_to(
-  "news",
-  "YACT::DB::Result::News",
-  { news_id => "news_id" },
-  { is_deferrable => 0, on_delete => "NO ACTION", on_update => "NO ACTION" },
+    "news",
+    "YACT::DB::Result::News",
+    { news_id => "news_id" },
+    {   is_deferrable => 0,
+        on_delete     => "NO ACTION",
+        on_update     => "NO ACTION"
+    },
 );
 
 1;

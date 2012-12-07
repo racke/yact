@@ -6,7 +6,10 @@ YACT::DB::Result::Track
 
 =cut
 
-use DBIx::Class::Candy -components => [ 'TimeStamp', 'InflateColumn::DateTime', 'InflateColumn::Serializer', 'EncodedColumn' ];
+use DBIx::Class::Candy -components => [
+    'TimeStamp',                 'InflateColumn::DateTime',
+    'InflateColumn::Serializer', 'EncodedColumn'
+];
 
 =head1 TABLE: C<tracks>
 
@@ -40,26 +43,19 @@ table("tracks");
 
 =cut
 
-column
-  "track_id",
-  {
+column "track_id",
+    {
     data_type         => "integer",
     is_auto_increment => 1,
     is_nullable       => 0,
     sequence          => "tracks_track_id_seq",
-  };
+    };
 
-column
-  "conf_id",
-  { data_type => "text", is_nullable => 0 };
+column "conf_id", { data_type => "text", is_nullable => 0 };
 
-column
-  "title",
-  { data_type => "text", is_nullable => 0 };
+column "title", { data_type => "text", is_nullable => 0 };
 
-column
-  "description",
-  { data_type => "text", is_nullable => 1 };
+column "description", { data_type => "text", is_nullable => 1 };
 
 =head1 PRIMARY KEY
 
@@ -84,10 +80,9 @@ Related object: L<YACT::DB::Result::Talk>
 =cut
 
 has_many(
-  "talks",
-  "YACT::DB::Result::Talk",
-  { "foreign.track_id" => "self.track_id" },
-  { cascade_copy => 0, cascade_delete => 0 },
+    "talks", "YACT::DB::Result::Talk",
+    { "foreign.track_id" => "self.track_id" },
+    { cascade_copy       => 0, cascade_delete => 0 },
 );
 
 1;

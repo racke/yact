@@ -6,7 +6,10 @@ YACT::DB::Result::Event
 
 =cut
 
-use DBIx::Class::Candy -components => [ 'TimeStamp', 'InflateColumn::DateTime', 'InflateColumn::Serializer', 'EncodedColumn' ];
+use DBIx::Class::Candy -components => [
+    'TimeStamp',                 'InflateColumn::DateTime',
+    'InflateColumn::Serializer', 'EncodedColumn'
+];
 
 =head1 TABLE: C<events>
 
@@ -25,14 +28,13 @@ table("events");
 
 =cut
 
-column
-  "event_id",
-  {
+column "event_id",
+    {
     data_type         => "integer",
     is_auto_increment => 1,
     is_nullable       => 0,
     sequence          => "events_event_id_seq"
-  };
+    };
 
 =head2 conf_id
 
@@ -41,9 +43,7 @@ column
 
 =cut 
 
-column
-  "conf_id",
-  { data_type => "text", is_nullable => 0 };
+column "conf_id", { data_type => "text", is_nullable => 0 };
 
 =head2 title
 
@@ -52,9 +52,7 @@ column
 
 =cut
 
-column
-  "title",
-  { data_type => "text", is_nullable => 0 };
+column "title", { data_type => "text", is_nullable => 0 };
 
 =head2 abstract
 
@@ -63,9 +61,7 @@ column
 
 =cut
 
-column
-  "abstract",
-  { data_type => "text", is_nullable => 1 };
+column "abstract", { data_type => "text", is_nullable => 1 };
 
 =head2 url_abstract
 
@@ -74,9 +70,7 @@ column
 
 =cut
 
-column
-  "url_abstract",
-  { data_type => "text", is_nullable => 1 };
+column "url_abstract", { data_type => "text", is_nullable => 1 };
 
 =head2 room
 
@@ -85,9 +79,7 @@ column
 
 =cut
 
-column
-  "room",
-  { data_type => "text", is_nullable => 1 };
+column "room", { data_type => "text", is_nullable => 1 };
 
 =head2 duration
 
@@ -96,9 +88,7 @@ column
 
 =cut
 
-column
-  "duration",
-  { data_type => "integer", is_nullable => 1 };
+column "duration", { data_type => "integer", is_nullable => 1 };
 
 =head2 datetime
 
@@ -107,9 +97,7 @@ column
 
 =cut
 
-column
-  "datetime",
-  { data_type => "timestamp", is_nullable => 1 };
+column "datetime", { data_type => "timestamp", is_nullable => 1 };
 
 =head1 PRIMARY KEY
 

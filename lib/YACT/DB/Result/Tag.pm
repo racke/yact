@@ -6,7 +6,10 @@ YACT::DB::Result::Tag
 
 =cut
 
-use DBIx::Class::Candy -components => [ 'TimeStamp', 'InflateColumn::DateTime', 'InflateColumn::Serializer', 'EncodedColumn' ];
+use DBIx::Class::Candy -components => [
+    'TimeStamp',                 'InflateColumn::DateTime',
+    'InflateColumn::Serializer', 'EncodedColumn'
+];
 
 =head1 TABLE: C<tags>
 
@@ -45,30 +48,21 @@ table("tags");
 
 =cut
 
-column
-  "tag_id",
-  {
+column "tag_id",
+    {
     data_type         => "integer",
     is_auto_increment => 1,
     is_nullable       => 0,
     sequence          => "tags_tag_id_seq",
-  };
+    };
 
-column
-  "conf_id",
-  { data_type => "text", is_nullable => 0 };
+column "conf_id", { data_type => "text", is_nullable => 0 };
 
-column
-  "tag",
-  { data_type => "text", is_nullable => 0 };
+column "tag", { data_type => "text", is_nullable => 0 };
 
-column
-  "type",
-  { data_type => "text", is_nullable => 0 };
+column "type", { data_type => "text", is_nullable => 0 };
 
-column
-  "tagged_id",
-  { data_type => "text", is_nullable => 0 };
+column "tagged_id", { data_type => "text", is_nullable => 0 };
 
 =head1 PRIMARY KEY
 

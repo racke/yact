@@ -6,7 +6,10 @@ YACT::DB::Result::PmGroup
 
 =cut
 
-use DBIx::Class::Candy -components => [ 'TimeStamp', 'InflateColumn::DateTime', 'InflateColumn::Serializer', 'EncodedColumn' ];
+use DBIx::Class::Candy -components => [
+    'TimeStamp',                 'InflateColumn::DateTime',
+    'InflateColumn::Serializer', 'EncodedColumn'
+];
 
 =head1 TABLE: C<pm_groups>
 
@@ -55,38 +58,25 @@ table("pm_groups");
 
 =cut
 
-column
-  "group_id",
-  {
+column "group_id",
+    {
     data_type         => "integer",
     is_auto_increment => 1,
     is_nullable       => 0,
     sequence          => "pm_groups_group_id_seq",
-  };
+    };
 
-column
-  "xml_group_id",
-  { data_type => "integer", is_nullable => 1 };
+column "xml_group_id", { data_type => "integer", is_nullable => 1 };
 
-column
-  "name",
-  { data_type => "text", is_nullable => 1 };
+column "name", { data_type => "text", is_nullable => 1 };
 
-column
-  "status",
-  { data_type => "text", is_nullable => 1 };
+column "status", { data_type => "text", is_nullable => 1 };
 
-column
-  "continent",
-  { data_type => "text", is_nullable => 1 };
+column "continent", { data_type => "text", is_nullable => 1 };
 
-column
-  "country",
-  { data_type => "text", is_nullable => 1 };
+column "country", { data_type => "text", is_nullable => 1 };
 
-column
-  "state",
-  { data_type => "text", is_nullable => 1 };
+column "state", { data_type => "text", is_nullable => 1 };
 
 =head1 PRIMARY KEY
 
