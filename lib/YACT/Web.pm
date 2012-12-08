@@ -1,6 +1,6 @@
 package YACT::Web;
 use Dancer ':syntax';
-use YACT::DB;
+use YACT;
 
 our $VERSION = '0.1';
 
@@ -9,24 +9,23 @@ get '/' => sub {
 };
 
 hook 'before' => sub {
-    if ( !session('user') ) {
-        var requested_path => request->path_info;
+    if ( !session('user') && request->path_info !~ m{^/LOGIN} ) {
+        session( login_continue => request->path_info );
         request->path_info('/LOGIN');
     }
 };
 
 get '/LOGIN' => sub {
-
-    # Display a login page; the original URL they requested is available as
-    # vars->{requested_path}, so could be put in a hidden field in the form
-    template 'login', { path => vars->{requested_path} };
+    template 'login', { path => session('login_continue'), };
 };
 
 post '/LOGIN' => sub {
+    my $self      = shift;
+    my $y         = YACT->new;
+    my $this_user = $y->get_user( params->{user} );
 
-    # Validate the username and password they supplied
-    if ( params->{user} eq 'bob' && params->{pass} eq 'letmein' ) {
-        session user => params->{user};
+    if ( $this_user->check_passwd( params->{pass} ) ) {
+        session user => $this_user;
         redirect params->{path} || '/';
     }
     else {

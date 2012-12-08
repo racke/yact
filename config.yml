@@ -31,3 +31,9 @@ template: "simple"
 # YAML: stores YAML files in session_dir
 session: YAML
 session_dir: /tmp/dancer-sessions
+
+plugin:
+    Auth::Extensible:
+        realms:
+            users:
+                provider: 'YACT'
