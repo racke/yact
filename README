@@ -1,14 +1,15 @@
 # Setting up the development environment
 
-dzil authordeps | cpanm
-dzil listdeps   | cpanm
-dzil test
+ $ dzil authordeps | cpanm
+ $ dzil listdeps   | cpanm
+ $ dzil test
 
-./bin/yact-web.pl
+ $ ./bin/yact-web.pl
 
 # Perl::Tidy pre-commit hook
 
 If you plan on pushing to the main repository on github, please consider
 installing a pre-commit hook for normalizing how the Perl code looks.
 
-App::githook_perltidy is a good option for this.
+ $ cpanm App::githook_perltidy
+ $ githook-perltidy install
