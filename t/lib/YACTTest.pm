@@ -6,6 +6,9 @@ use YACT;
 use YACT::Config;
 use File::Tempdir;
 use Path::Class;
+use IO::All;
+
+use FindBin;
 
 has tempdir => (
     is      => 'ro',
@@ -52,7 +55,26 @@ sub _build_yact_config {
 sub init {
     my ($self) = @_;
     $self->yact->init;
+    $self->init_test_inifiles;
     $self->fill_test_database;
+}
+
+sub init_test_inifiles {
+    my ($self) = @_;
+    my $confs_ini = $self->yact->config->confs_ini;
+    my $remotes_dir =
+        dir( $FindBin::Bin, "..", "remotes", "remote" )->absolute;
+    io($confs_ini)->print(<<"___END_OF_CONFS_INI___");
+[qh2012eu]
+remote = $remotes_dir/qh2012eu
+
+[ye2013]
+remote = $remotes_dir/ye2013
+
+[yn2013]
+remote = $remotes_dir/yn2013
+
+___END_OF_CONFS_INI___
 }
 
 sub fill_test_database {

@@ -57,4 +57,15 @@ sub _build_db_params {
     return \%vars;
 }
 
+has confs_ini => (
+    is      => 'ro',
+    lazy    => 1,
+    builder => 1,
+);
+
+sub _build_confs_ini {
+    my ($self) = @_;
+    return file( $self->root, 'confs.ini' )->absolute;
+}
+
 1;
