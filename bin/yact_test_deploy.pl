@@ -2,12 +2,12 @@
 #####################
 # PODNAME: yact_test_deploy.pl
 
-use YACT;
-use YACT::Config;
-
 use FindBin;
 use lib "$FindBin::Bin/../t/lib";
 use lib "$FindBin::Bin/../lib";
+
+use YACT;
+use YACT::Config;
 
 use YACTTest;
 
