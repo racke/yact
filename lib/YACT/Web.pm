@@ -45,9 +45,10 @@ get '/user' => sub {
 };
 
 get '/user/:user_id' => sub {
-    my $user_id = params->{user_id};
+    my $yact = YACT->new;
+    my $user = $yact->get_user_by_id( params->{user_id} );
 
-    template 'user';
+    template 'user', { user => $user };
 };
 
 true;

@@ -50,6 +50,10 @@ sub usercount { shift->db->resultset('User')->search( {} )->count }
 
 sub get_user { shift->db->resultset('User')->find( { login => shift } ) }
 
+sub get_user_by_id {
+    shift->db->resultset('User')->find( { user_id => shift } );
+}
+
 sub get_repository {
     my ( $self, $remote, $type ) = @_;
     return YACT::Repository->new(
