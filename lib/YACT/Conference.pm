@@ -93,11 +93,41 @@ sub get_events {
     );
 }
 
+#
+# News
+#
+#################
+
+sub add_news {
+    my ( $self, $user ) = @_;
+    $self->yact->db->resultset('News')->create(
+        {   conf_id  => $self->conf_id,
+            user_id  => $user->user_id,
+            datetime => DateTime->now,
+        }
+    );
+}
+
 sub get_news {
     my $self = shift;
     $self->yact->db->resultset('News')->search(
         { conf_id => $self->conf_id, @_ },
         { order_by => { -desc => 'datetime' } }
+    );
+}
+
+#
+# Tracks
+#
+##################
+
+sub add_track {
+    my ( $self, $title, $description ) = @_;
+    $self->yact->db->resultset('Track')->create(
+        {   conf_id     => $self->conf_id,
+            title       => $title,
+            description => $description,
+        }
     );
 }
 
@@ -109,6 +139,11 @@ sub get_tracks {
     );
 }
 
+#
+# Talks
+#
+##################
+
 sub get_talks {
     my $self = shift;
     $self->yact->db->resultset('Talk')->search(
@@ -119,10 +154,21 @@ sub get_talks {
     );
 }
 
+#
+# Tags
+#
+##################
+
 sub get_tags {
     my $self = shift;
     $self->yact->db->resultset('Tag')
-        ->search( { conf_id => $self->conf_id, @_ }, { order_by => 'tag', } );
+        ->search( { conf_id => $self->conf_id, @_ }, { order_by => 'tag' } );
+}
+
+sub get_tags_list {
+    my $self = shift;
+    my %tags = map { $_->tag, 1 } @{ [ $self->get_tags ] };
+    return keys %tags;
 }
 
 #

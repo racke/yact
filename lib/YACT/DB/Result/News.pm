@@ -94,4 +94,50 @@ has_many(
     { cascade_copy      => 0, cascade_delete => 0 },
 );
 
+=head1 FUNCTIONS
+
+=head2 publish
+
+Automatically set the article published attribute to true and updates
+the DB.
+
+=cut
+
+sub publish {
+    my ($self) = @_;
+    $self->published(1);
+    return $self->update;
+}
+
+=head2 unpublish
+
+Automatically set the article published attribute to false and updates
+the DB.
+
+=cut
+
+sub unpublish {
+    my ($self) = @_;
+    $self->published(0);
+    return $self->update;
+}
+
+=head2 add_news_item
+
+Adding a new news language item to the DB, requires lang, title and
+text
+
+=cut
+
+sub add_news_item {
+    my ( $self, $lang, $title, $text ) = @_;
+    $self->create_related(
+        'news_items',
+        {   lang  => $lang,
+            title => $title,
+            text  => $text,
+        }
+    );
+}
+
 1;
