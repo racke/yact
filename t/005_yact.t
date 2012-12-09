@@ -67,10 +67,29 @@ is_deeply(
 );
 
 my @attendee =
-    sort { $a->user->login cmp $b->user->login } $qh2012eu->get_attendees;
+    sort { $a->user->login cmp $b->user->login }
+    $qh2012eu->get_participations;
 
 is( $attendee[0]->user->login, 'test1', 'test1 participate at qh2012eu' );
 is( $attendee[1]->user->login, 'test2', 'test2 participate at qh2012eu' );
 is( $attendee[2]->user->login, 'test3', 'test3 participate at qh2012eu' );
+
+is_deeply( [ $qh2012eu->get_user_rights( $attendee[0]->user ) ],
+    [qw( admin )], 'Checking test1 is admin at qh2012eu' );
+is_deeply( [ $qh2012eu->get_user_rights( $attendee[1]->user ) ],
+    [], 'Checking test2 has no rights at qh2012eu' );
+is_deeply(
+    [ $qh2012eu->get_user_rights( $attendee[2]->user ) ],
+    [qw( talks_admin treasurer wiki_admin )],
+    'Checking test3 is talks_admin treasurer wiki_admin at qh2012eu'
+);
+
+is_deeply(
+    $qh2012eu->get_rights,
+    {   'test1' => [ 'admin' ],
+        'test3' => [ 'treasurer', 'talks_admin', 'wiki_admin' ]
+    },
+    'Checking user rights table of qh2012eu'
+);
 
 done_testing;

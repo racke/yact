@@ -50,7 +50,7 @@ sub config {
         [@repo_inis] )->data;
 }
 
-sub add_attendee {
+sub add_participation {
     my ( $self, $user, $tshirt, $nb_family ) = @_;
     $self->yact->db->resultset('Participation')->create(
         {   conf_id => $self->conf_id,
@@ -62,10 +62,91 @@ sub add_attendee {
     );
 }
 
-sub get_attendees {
-    my ($self) = @_;
-    $self->yact->db->resultset('Participation')
-        ->search( { conf_id => $self->conf_id, } );
+sub get_participations {
+    my $self = shift;
+    $self->yact->db->resultset('Participation')->search(
+        { conf_id => $self->conf_id, @_ },
+        { order_by => { -desc => 'datetime' } }
+    );
+}
+
+sub get_events {
+    my $self = shift;
+    $self->yact->db->resultset('Event')->search(
+        { conf_id => $self->conf_id, @_ },
+        { order_by => { -desc => 'datetime' } }
+    );
+}
+
+sub get_news {
+    my $self = shift;
+    $self->yact->db->resultset('News')->search(
+        { conf_id => $self->conf_id, @_ },
+        { order_by => { -desc => 'datetime' } }
+    );
+}
+
+sub get_tracks {
+    my $self = shift;
+    $self->yact->db->resultset('Track')->search(
+        { conf_id => $self->conf_id, @_ },
+        { order_by => { -asc => 'track_id' } }
+    );
+}
+
+sub get_talks {
+    my $self = shift;
+    $self->yact->db->resultset('Talk')->search(
+        { conf_id => $self->conf_id, @_ },
+        {
+            # TODO
+        }
+    );
+}
+
+sub get_tags {
+    my $self = shift;
+    $self->yact->db->resultset('Tag')
+        ->search( { conf_id => $self->conf_id, @_ }, { order_by => 'tag', } );
+}
+
+#
+# RIGHTS
+#
+##################
+
+sub get_rights {
+    my $self = shift;
+    my %rights;
+    for ( $self->yact->db->resultset('Right')
+        ->search( { conf_id => $self->conf_id, @_ }, { prefetch => 'user' } )
+        )
+    {
+        $rights{ $_->user->login } = []
+            unless defined $rights{ $_->user->login };
+        push @{ $rights{ $_->user->login } }, $_->right_id;
+    }
+    return \%rights;
+}
+
+sub get_user_rights {
+    my $self = shift;
+    return sort { $a cmp $b } map { $_->right_id } @{
+        [   $self->yact->db->resultset('Right')->search(
+                { user_id => shift->user_id, conf_id => $self->conf_id, @_ }
+            )
+        ]
+    };
+}
+
+sub add_user_right {
+    my ( $self, $user, $right ) = @_;
+    $self->yact->db->resultset('Right')->create(
+        {   user_id  => $user->user_id,
+            conf_id  => $self->conf_id,
+            right_id => $right,
+        }
+    );
 }
 
 1;
