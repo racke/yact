@@ -293,11 +293,14 @@ sub fill_test_database {
     $qh2012eu->add_participation( $yact->get_user('test1'), 'XL',  0 );
     $qh2012eu->add_participation( $yact->get_user('test2'), 'XXL', 0 );
     $qh2012eu->add_participation( $yact->get_user('test3'), 'M',   2 );
+    #########################################################
 
     $qh2012eu->add_user_right( $yact->get_user('test1'), 'admin' );
     $qh2012eu->add_user_right( $yact->get_user('test3'), 'treasurer' );
     $qh2012eu->add_user_right( $yact->get_user('test3'), 'talks_admin' );
     $qh2012eu->add_user_right( $yact->get_user('test3'), 'wiki_admin' );
+
+    $qh2012eu->add_track( 'Main Track', 'Inside of a museum!' );
 
     my $ye2013 = $yact->get_conference('ye2013');
 
@@ -305,6 +308,10 @@ sub fill_test_database {
     $ye2013->add_user_right( $yact->get_user('_test'),  'talks_admin' );
     $ye2013->add_user_right( $yact->get_user('nuffin'), 'wiki_admin' );
     $ye2013->add_user_right( $yact->get_user('test3'),  'treasurer' );
+
+    $ye2013->add_track( 'Good Track', 'Heaven' );
+    $ye2013->add_track( 'Bad Track',  'Hell' );
+    $ye2013->add_track( 'Evil Track', 'London' );
 
     $ye2013->add_participation( $yact->get_user('test1'),   'XL',  0 );
     $ye2013->add_participation( $yact->get_user('test2'),   'XXL', 1 );

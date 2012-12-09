@@ -200,6 +200,12 @@ sub get_user_rights {
     };
 }
 
+sub has_user_right {
+    my ( $self, $user, $right ) = @_;
+    return
+        grep { $_ eq $right || $_ eq 'admin' } $self->get_user_rights($user);
+}
+
 sub add_user_right {
     my ( $self, $user, $right ) = @_;
     $self->yact->db->resultset('Right')->create(

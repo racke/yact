@@ -125,6 +125,12 @@ is( $attendee[2]->user->login, 'test3', 'test3 participate at qh2012eu' );
 ok( $qh2012eu->full, 'qh2012eu is full' );
 ok( !$ye2013->full,  'No limit set, so ye2013 is never full' );
 
+my @tracks = sort { $a->title cmp $b->title } $ye2013->get_tracks;
+
+is( $tracks[0]->title, 'Bad Track',  'Checking tracklist of ye2013' );
+is( $tracks[1]->title, 'Evil Track', 'Checking tracklist of ye2013' );
+is( $tracks[2]->title, 'Good Track', 'Checking tracklist of ye2013' );
+
 is_deeply( [ $qh2012eu->get_user_rights( $attendee[0]->user ) ],
     [qw( admin )], 'Checking test1 is admin at qh2012eu' );
 is_deeply( [ $qh2012eu->get_user_rights( $attendee[1]->user ) ],
@@ -134,6 +140,13 @@ is_deeply(
     [qw( talks_admin treasurer wiki_admin )],
     'Checking test3 is talks_admin treasurer wiki_admin at qh2012eu'
 );
+
+ok( $qh2012eu->has_user_right( $attendee[2]->user, 'wiki_admin' ),
+    'Checked attendee is wiki admin' );
+ok( !$qh2012eu->has_user_right( $attendee[1]->user, 'wiki_admin' ),
+    'Other checked attendee is not wiki admin' );
+ok( $qh2012eu->has_user_right( $attendee[0]->user, 'wiki_admin' ),
+    'Admin attendee is wiki admin' );
 
 is_deeply(
     $qh2012eu->get_rights,
