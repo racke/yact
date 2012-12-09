@@ -1,4 +1,4 @@
-<p>Welcome to the index page, [% session.user.login %]!</p>
+<p>Welcome to the index page, <a href="/user/[% session.user.user_id %]">[% session.user.login %]</a>!</p>
 
 
 <ol><li><a href="/LOGOUT">Log out</a></li></ol>

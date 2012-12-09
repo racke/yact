@@ -3,33 +3,15 @@ package Dancer::Plugin::Auth::Extensible::Provider::YACT;
 use strict;
 use parent 'Dancer::Plugin::Auth::Extensible::Provider::Base';
 
-sub users {
-    my $self = shift;
-
-    return {
-        'dave' => {
-            name     => 'David Precious',
-            password => 'beer',
-            roles    => [qw(Motorcyclist BeerDrinker)],
-        },
-        'bob' => {
-            name     => 'Bob The Builder',
-            password => 'canhefixit',
-            roles    => [qw(Fixer)],
-        },
-    };
-}
-
 =head1 NAME
 
-Dancer::Plugin::Auth::Extensible::Example - example authentication
-provider
+Dancer::Plugin::Auth::Extensible::YACT - authentication provider for
+YACT
 
 
 =head1 DESCRIPTION
 
-This class is intended as an example of what an authentication provider
-class should do.  It is not intended for serious use (clearly).
+
 
 See L<Dancer::Plugin::Auth::Extensible> for details on how to use the
 authentication framework, including how to pick a more useful
@@ -73,7 +55,7 @@ Details should be returned as a hashref.
 sub get_user_details {
     my ( $self, $username ) = @_;
 
-    return $self->users->{ lc $username };
+    return $self->yact->get_user($username);
 }
 
 =item get_user_roles
@@ -85,8 +67,8 @@ Given a username, return a list of roles that user has.
 sub get_user_roles {
     my ( $self, $username ) = @_;
 
-    my $user_details = $self->get_user_details($username) or return;
-    return $user_details->{roles};
+    my $user = $self->get_user_details($username) or return;
+    return $user->rights();
 }
 
 1;
