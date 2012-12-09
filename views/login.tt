@@ -1,7 +1,7 @@
-You are about to login to '<% path %>'
+You are about to login to '[% path %]'
 
 <form method="POST" action="/LOGIN">
-<input type="hidden" name="path" value="<% requested_path %>">
+<input type="hidden" name="path" value="[% path %]">
 
 <table>
 
