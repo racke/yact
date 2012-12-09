@@ -1,7 +1,7 @@
 package Dancer::Plugin::Auth::Extensible::Provider::YACT;
 
 use strict;
-use base "Dancer::Plugin::Auth::Extensible::Provider::Base";
+use parent 'Dancer::Plugin::Auth::Extensible::Provider::Base';
 
 sub users {
     my $self = shift;
