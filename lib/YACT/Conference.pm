@@ -38,19 +38,15 @@ has repository => (
     }
 );
 
-has config => (
-    is      => 'ro',
-    lazy    => 1,
-    default => sub {
-        my ($self) = @_;
-        my @master_inis;
-        push @master_inis, $self->yact->config->confs_ini;
-        my $repo_ini = $self->repository->get_file('yact.ini');
-        my @repo_inis;
-        push @repo_inis, $repo_ini if -f $repo_ini;
-        return YACT::Conference::INI->new( $self->conf_id, [@master_inis],
-            [@repo_inis] )->data;
-    }
-);
+sub config {
+    my ($self) = @_;
+    my @master_inis;
+    push @master_inis, $self->yact->config->confs_ini;
+    my $repo_ini = $self->repository->get_file('yact.ini');
+    my @repo_inis;
+    push @repo_inis, $repo_ini if -f $repo_ini;
+    return YACT::Conference::INI->new( $self->conf_id, [@master_inis],
+        [@repo_inis] )->data;
+}
 
 1;
