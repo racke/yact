@@ -88,7 +88,8 @@ ___END_OF_CONFS_INI___
 
 sub fill_test_database {
     my ($self) = @_;
-    my $db = $self->yact->db;
+    my $yact   = $self->yact;
+    my $db     = $yact->db;
     scalar $db->populate(
         'User',
         [
@@ -263,6 +264,12 @@ sub fill_test_database {
             ],
         ],
     );
+
+    my $qh2012eu = $yact->get_conference('qh2012eu');
+
+    $qh2012eu->add_attendee( $yact->get_user('test1'), 'XL',  0 );
+    $qh2012eu->add_attendee( $yact->get_user('test2'), 'XXL', 0 );
+    $qh2012eu->add_attendee( $yact->get_user('test3'), 'M',   2 );
 
 }
 

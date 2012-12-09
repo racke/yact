@@ -5,6 +5,7 @@ package YACT::Conference;
 use Moo;
 use Path::Class;
 use YACT::Conference::INI;
+use DateTime;
 
 has yact => (
     is       => 'ro',
@@ -47,6 +48,24 @@ sub config {
     push @repo_inis, $repo_ini if -f $repo_ini;
     return YACT::Conference::INI->new( $self->conf_id, [@master_inis],
         [@repo_inis] )->data;
+}
+
+sub add_attendee {
+    my ( $self, $user, $tshirt, $nb_family ) = @_;
+    $self->yact->db->resultset('Participation')->create(
+        {   conf_id => $self->conf_id,
+            user_id => $user->user_id,
+            $tshirt            ? ( tshirt_size => uc($tshirt) ) : (),
+            defined $nb_family ? ( nb_family   => $nb_family )  : (),
+            datetime => DateTime->now,
+        }
+    );
+}
+
+sub get_attendees {
+    my ($self) = @_;
+    $self->yact->db->resultset('Participation')
+        ->search( { conf_id => $self->conf_id, } );
 }
 
 1;

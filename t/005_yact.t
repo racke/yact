@@ -66,4 +66,11 @@ is_deeply(
     'Checking qh2012eu config (after removing remote)'
 );
 
+my @attendee =
+    sort { $a->user->login cmp $b->user->login } $qh2012eu->get_attendees;
+
+is( $attendee[0]->user->login, 'test1', 'test1 participate at qh2012eu' );
+is( $attendee[1]->user->login, 'test2', 'test2 participate at qh2012eu' );
+is( $attendee[2]->user->login, 'test3', 'test3 participate at qh2012eu' );
+
 done_testing;
