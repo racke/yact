@@ -21,7 +21,7 @@ my $yact = $yacttest->yact;
 ok( -d $yacttest->testdir, 'Checking if dir was successful created' );
 is( $yact->root, $yacttest->testdir,
     'Checking root directory be where expected' );
-is( $yact->usercount, 11, 'Checking for expected test user count' );
+is( $yact->usercount, 12, 'Checking for expected test user count' );
 is( $yact->get_user('test1')->email,
     'test@act.yapc.eu', 'Checking test1 for right email' );
 ok( $yact->get_user('test1')->check_passwd('test1'),
