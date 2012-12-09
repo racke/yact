@@ -150,6 +150,30 @@ sub fill_test_database {
                 'test@act.yapc.eu', '',
                 'en',               'Europe/Berlin'
             ],
+            [
+                'gfuji', 'none',
+                undef, '藤 吾郎', '',
+                'gfx', 0,
+                'jp', 'Tōkyō',
+                'http://d.hatena.ne.jp/gfx/', 'gfuji(at)cpan.org',
+                'GFUJI', 'ja', 'Asia/Tokyo'
+            ],
+            [
+                'vti', 'none',
+                undef, 'Вячеслав', 'Тихановский',
+                'vti', 0,
+                'ua', 'Київ',
+                'http://showmetheco.de/', 'vti(at)cpan.org',
+                'VTI', 'uk', 'Europe/Kiev'
+            ],
+            [
+                'azawawi', 'none',
+                undef, 'أحمد محمد زواوي', '',
+                'azawawi', 0,
+                'jo', 'Amman',
+                'http://ahmadzawawi.blogspot.com/', 'ahmad.zawawi(at)gmail.com',
+                'AZAWAWI', 'ar', 'Asia/Amman'
+            ],
             #[
             #    'login', 'passwd',
             #    'salutation', 'first_name', 'last_name',
