@@ -20,7 +20,7 @@ sub users {
     };
 }
 
-=head1 NAME 
+=head1 NAME
 
 Dancer::Plugin::Auth::Extensible::Example - example authentication
 provider
