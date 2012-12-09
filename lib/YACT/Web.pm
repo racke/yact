@@ -24,6 +24,8 @@ post '/LOGIN' => sub {
     my $y         = YACT->new;
     my $this_user = $y->get_user( params->{user} );
 
+    return redirect '/LOGIN?failed=1' unless defined $this_user;
+
     if ( $this_user->check_passwd( params->{pass} ) ) {
         session user => $this_user;
         redirect params->{path} || '/';
