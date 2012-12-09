@@ -3,35 +3,37 @@ use Dancer ':syntax';
 use YACT;
 
 our $VERSION = '0.1';
+our $YACT    = YACT->new;
 
 get '/' => sub {
     template 'index';
 };
 
 hook 'before' => sub {
-    if ( !session('user') && request->path_info !~ m{^/LOGIN} ) {
+    if ( !session('user') && request->path_info !~ m{^/login} ) {
         session( login_continue => request->path_info );
-        request->path_info('/LOGIN');
+        request->path_info('/login');
     }
 };
 
-get '/LOGIN' => sub {
+get '/LOGIN' => sub { redirect '/login'; };
+
+get '/login' => sub {
     template 'login', { path => session('login_continue'), };
 };
 
-post '/LOGIN' => sub {
+post '/login' => sub {
     my $self      = shift;
-    my $y         = YACT->new;
-    my $this_user = $y->get_user( params->{user} );
+    my $this_user = $YACT->get_user( params->{user} );
 
-    return redirect '/LOGIN?failed=1' unless defined $this_user;
+    return redirect '/login?failed=1' unless defined $this_user;
 
     if ( $this_user->check_passwd( params->{pass} ) ) {
         session user => $this_user;
         redirect params->{path} || '/';
     }
     else {
-        redirect '/LOGIN?failed=1';
+        redirect '/login?failed=1';
     }
 };
 
@@ -48,10 +50,14 @@ get '/user' => sub {
 };
 
 get '/user/:user_id' => sub {
-    my $yact = YACT->new;
-    my $user = $yact->get_user_by_id( params->{user_id} );
+    my $user = $YACT->get_user_by_id( params->{user_id} );
 
     template 'user', { user => $user };
 };
 
-true;
+get '/photo' => sub {
+    my $user = session('user');
+
+    }
+
+    true;
