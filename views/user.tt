@@ -1,9 +1,9 @@
 
 <h1>Profile for [% user.nick_name %]</h1>
 
-<p><% user.first_name %> <% user.last_name %>
-<p>from <% user.city %>, <% user.country %>
+<p>[% user.first_name %] [% user.last_name %]
+<p>from [% user.city %], [% user.country %]
 
-<p>» <a href="<% user.web_page %>"><% user.web_page %></a>
-<p>» <a href="http://metacpan.org/author/<% user.pause_id %>"><% user.pause_id %></a>
+<p>» <a href="[% user.web_page %]">[% user.web_page %]</a>
+<p>» <a href="http://metacpan.org/author/[% user.pause_id %]">[% user.pause_id %]</a>
 
