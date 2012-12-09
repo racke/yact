@@ -27,10 +27,12 @@ sub _build_config { YACT::Config->new }
 sub init {
     my ($self) = @_;
     unless ( -d $self->config->root ) {
-        mkdir $self->config->root;
+        mkdir $self->config->root
+            or die "Can't create the YACT_ROOT dir '"
+            . $self->config->root . "': $!";
     }
     else {
-        die "YACT_ROOT already exist";
+        die "YACT_ROOT already exists";
     }
     $self->db->deploy;
 }
