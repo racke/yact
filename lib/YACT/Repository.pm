@@ -40,9 +40,17 @@ sub _git {
     Git::Repository->new( work_tree => $self->_cachedir );
 }
 
-sub get_file { file( shift->_cachedir, @_ ) }
+sub get_file {
+    my ($self) = @_;
+    $self->_git;
+    return file( shift->_cachedir, @_ );
+}
 
 sub BUILD {
+    my ($self) = @_;
+}
+
+sub update {
     my ($self) = @_;
     $self->_git->run( pull => "origin", "master" ) if $self->type eq 'git';
 }

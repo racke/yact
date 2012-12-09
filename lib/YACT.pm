@@ -81,7 +81,12 @@ sub get_conference {
 sub get_conferences {
     my ($self) = @_;
     my @conferences;
-    for ( sort { $a cmp $b } keys %{ $self->get_confs_ini } ) {
+    for (
+        sort { $a cmp $b }
+        grep { $_ ne '_' and $_ !~ /\// }
+        keys %{ $self->get_confs_ini }
+        )
+    {
         push @conferences, $self->get_conference($_);
     }
     return @conferences;
