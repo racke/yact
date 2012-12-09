@@ -70,6 +70,21 @@ sub get_participations {
     );
 }
 
+sub count_participations {
+    my $self = shift;
+    $self->yact->db->resultset('Participation')->search(
+        { conf_id => $self->conf_id, @_ },
+        { order_by => { -desc => 'datetime' } }
+    )->count;
+}
+
+sub full {
+    my $self = shift;
+    return unless defined $self->config->{registration}->{max_attendees};
+    $self->count_participations
+        >= $self->config->{registration}->{max_attendees} ? 1 : 0;
+}
+
 sub get_events {
     my $self = shift;
     $self->yact->db->resultset('Event')->search(

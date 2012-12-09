@@ -289,6 +289,7 @@ sub fill_test_database {
 
     my $qh2012eu = $yact->get_conference('qh2012eu');
 
+    # DO NOT ADD MORE PARTICIPATION - THE CONFERENCE IS FULL!
     $qh2012eu->add_participation( $yact->get_user('test1'), 'XL',  0 );
     $qh2012eu->add_participation( $yact->get_user('test2'), 'XXL', 0 );
     $qh2012eu->add_participation( $yact->get_user('test3'), 'M',   2 );
