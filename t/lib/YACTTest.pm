@@ -208,6 +208,61 @@ sub fill_test_database {
 
         ]
     );
+    scalar $db->populate(
+        'Event',
+        [
+
+            [   qw( conf_id title abstract url_abstract room duration datetime )
+            ],
+            [   'qh2012eu',
+                'Coffee Break',
+                'Are you kidding? Coffee is available all the time. Stop breaking. Go hacking!',
+                '',
+                'Classe Numérique',
+                '10',
+                '11:00',
+            ],
+            [   'ye2013',
+                'Coffee/Tee Break',
+                'Relax, chat, talk to others while having a hot beverage',
+                'http://www.starbucks.com/',
+                'Agora',
+                '20',
+                '16:00',
+            ],
+            [   'yn2013', 'Welcome',
+                'Welcome talk.
+                Introduction talk to the event.
+                Free breakfast (coffee, tea, juices, pastries, yegg and beacon',
+                '',   'Main Hall',
+                '30', '09:30',
+            ],
+            [   'qh2012eu',
+                'Coffee Break',
+                'Are you kidding? Coffe is available all the time. Stop breaking. Go hacking!',
+                undef,
+                'Classe Numérique',
+                '10',
+                '11:00',
+            ],
+            [   'qh2012eu',
+                'コーヒーブレイク',
+                'コーヒーブレイク is provided to you by Google translate. I hope it is not rude.',
+                '',
+                'Agora',
+                '20',
+                '16:00',
+            ],
+            [   'qh2012eu',
+                'Coffee Break',
+                'Are you kidding? Coffe is available all the time. Stop breaking. Go hacking!',
+                '',
+                'Classe Numérique',
+                '10',
+                '11:00',
+            ],
+        ],
+    );
 
 }
 
