@@ -150,6 +150,14 @@ sub fill_test_database {
                 'test@act.yapc.eu', '',
                 'en',               'Europe/Berlin'
             ],
+            #[
+            #    'login', 'passwd',
+            #    'salutation', 'first_name', 'last_name',
+            #    'nick_name', 'pseudonymous',
+            #    'country', 'town',
+            #    'web_page', 'email',
+            #    'pause_id', 'language', 'timezone'
+            #],
 
         ]
     );
