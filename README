@@ -1,7 +1,7 @@
 # Setting up the development environment
 
- $ dzil authordeps | cpanm
- $ dzil listdeps   | cpanm
+ $ dzil authordeps         | cpanm
+ $ dzil listdeps --author  | cpanm
  $ dzil test
 
  $ ./bin/yact-web.pl
