@@ -182,7 +182,7 @@ sub fill_test_database {
                 undef,                    'Вячеслав',
                 'Тихановский', 'vti',
                 0,                        'ua',
-                'Київ',               'http://showmetheco.de/',
+                'Киев',               'http://showmetheco.de/',
                 'vti(at)cpan.org',        'VTI',
                 'uk',                     'Europe/Kiev',
                 undef
