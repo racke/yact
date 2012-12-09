@@ -94,7 +94,7 @@ sub fill_test_database {
         'User',
         [
 
-            [   qw( login passwd salutation first_name last_name nick_name pseudonymous country town web_page email pause_id language timezone )
+            [   qw( login passwd salutation first_name last_name nick_name pseudonymous country town web_page email pause_id language timezone photo_name )
             ],
 
             [   'test1',            'test1',
@@ -103,7 +103,8 @@ sub fill_test_database {
                 0,                  'de',
                 '',                 'http://test.de/',
                 'test@act.yapc.eu', 'BLA',
-                'de',               'Europe/Berlin'
+                'de',               'Europe/Berlin',
+                undef
             ],
             [   'test2',            'test2',
                 1,                  'Überzone',
@@ -111,7 +112,8 @@ sub fill_test_database {
                 1,                  'uk',
                 'London',           'http://test.de/',
                 'test@act.yapc.eu', '',
-                'en',               'Europe/Berlin'
+                'en',               'Europe/Berlin',
+                'test2.jpg'
             ],
             [   'test3',            'test3',
                 3,                  'Perl',
@@ -119,7 +121,8 @@ sub fill_test_database {
                 0,                  'jp',
                 '',                 'http://test.de/',
                 'test@act.yapc.eu', '',
-                'jp',               'Europe/Berlin'
+                'jp',               'Europe/Berlin',
+                'test3-user.jpg'
             ],
             [   'test',             'test',
                 undef,              'Peter',
@@ -127,13 +130,26 @@ sub fill_test_database {
                 1,                  'at',
                 'Wien',             'http://test.de/',
                 'test@act.yapc.eu', '',
-                'at',               'Europe/Berlin'
+                'at',               'Europe/Berlin',
+                'test.jpg'
             ],
-            [   '1test', '1test', 1, 'Paul', 'Overlord', undef, 0, 'ru', '',
-                '', 'test@act.yapc.eu', 'BLUB', 'ru', 'Europe/Berlin'
+            [   '1test',            '1test',
+                1,                  'Paul',
+                'Overlord',         undef,
+                0,                  'ru',
+                '',                 '',
+                'test@act.yapc.eu', 'BLUB',
+                'ru',               'Europe/Berlin',
+                '1test.jpg'
             ],
-            [   'tt_tt', 'tt_tt', 3, 'Marry', 'Ho', 'Pseudo3', 1, 'de',
-                'Dresden', '', 'test@act.yapc.eu', '', 'de', 'Europe/Berlin'
+            [   'tt_tt',            'tt_tt',
+                3,                  'Marry',
+                'Ho',               'Pseudo3',
+                1,                  'de',
+                'Dresden',          '',
+                'test@act.yapc.eu', '',
+                'de',               'Europe/Berlin',
+                'tt_tt.jpg'
             ],
             [   '_test',            '_test',
                 undef,              'Sèbastian',
@@ -141,7 +157,8 @@ sub fill_test_database {
                 0,                  'fr',
                 undef,              undef,
                 'test@act.yapc.eu', '',
-                'fr',               'Europe/Berlin'
+                'fr',               'Europe/Berlin',
+                '_test.jpg'
             ],
             [   'test_',            'test_',
                 1,                  'Sébastian',
@@ -149,7 +166,8 @@ sub fill_test_database {
                 1,                  'us',
                 'Philadelphia',     '',
                 'test@act.yapc.eu', '',
-                'en',               'Europe/Berlin'
+                'en',               'Europe/Berlin',
+                'test_.jpg'
             ],
             [   'gfuji',             'none',
                 undef,               '藤 吾郎',
@@ -157,7 +175,8 @@ sub fill_test_database {
                 0,                   'jp',
                 'Tōkyō',           'http://d.hatena.ne.jp/gfx/',
                 'gfuji(at)cpan.org', 'GFUJI',
-                'ja',                'Asia/Tokyo'
+                'ja',                'Asia/Tokyo',
+                'gfuji.jpg'
             ],
             [   'vti',                    'none',
                 undef,                    'Вячеслав',
@@ -165,7 +184,8 @@ sub fill_test_database {
                 0,                        'ua',
                 'Київ',               'http://showmetheco.de/',
                 'vti(at)cpan.org',        'VTI',
-                'uk',                     'Europe/Kiev'
+                'uk',                     'Europe/Kiev',
+                undef
             ],
             [   'azawawi',
                 'none',
@@ -180,7 +200,8 @@ sub fill_test_database {
                 'ahmad.zawawi(at)gmail.com',
                 'AZAWAWI',
                 'ar',
-                'Asia/Amman'
+                'Asia/Amman',
+                undef
             ],
             [   'nuffin',
                 'none',
@@ -195,7 +216,8 @@ sub fill_test_database {
                 'nothingmuch(at)woobling.org',
                 'NUFFIN',
                 'he',
-                'Asia/Jerusalem'
+                'Asia/Jerusalem',
+                'nuffin.jpg'
             ],
 
             #[
@@ -204,7 +226,7 @@ sub fill_test_database {
             #    'nick_name', 'pseudonymous',
             #    'country', 'town',
             #    'web_page', 'email',
-            #    'pause_id', 'language', 'timezone'
+            #    'pause_id', 'language', 'timezone', 'photo_name'
             #],
 
         ]

@@ -58,6 +58,7 @@ get '/user/:user_id' => sub {
 get '/photo' => sub {
     my $user = session('user');
 
-    }
+    template 'photo', { user => $user };
+};
 
-    true;
+true;

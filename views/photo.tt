@@ -1,0 +1,5 @@
+<p>Welcome to the photo page, <a href="/user/[% session.user.user_id %]">[% session.user.login %]</a>!</p>
+
+This is a photo: [% user.photo %]
+
+<ol><li><a href="/LOGOUT">Log out</a></li></ol>
