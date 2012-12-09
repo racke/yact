@@ -52,7 +52,7 @@ sub BUILD {
 
 sub update {
     my ($self) = @_;
-    $self->_git->run( pull => "origin", "master", { quiet => 1 } )
+    $self->_git->run( pull => '-q', "origin", "master" )
         if $self->type eq 'git';
 }
 
