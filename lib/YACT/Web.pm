@@ -41,13 +41,17 @@ get '/LOGOUT' => sub {
 };
 
 get '/user' => sub {
-    redirect '/user/' . session->{user_id};
+    my $user    = session('user');
+    my $user_id = $user->user_id;
+
+    redirect '/user/' . $user_id;
 };
 
 get '/user/:user_id' => sub {
-    my $user_id = params->{user_id};
+    my $yact = YACT->new;
+    my $user = $yact->get_user_by_id( params->{user_id} );
 
-    template 'user';
+    template 'user', { user => $user };
 };
 
 true;
