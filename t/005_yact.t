@@ -2,6 +2,7 @@
 
 use strict;
 use warnings;
+use IO::All;
 use Test::More;
 use Path::Class;
 use File::Tempdir;
@@ -28,7 +29,37 @@ ok( $yact->get_user('test1')->check_passwd('test1'),
 
 my @conferences = $yact->get_conferences;
 
-use DDP;
-p(@conferences);
+my $qh2012eu = $yact->get_conference('qh2012eu');
+isa_ok( $qh2012eu, 'YACT::Conference' );
+
+my $repo = $qh2012eu->repository;
+isa_ok( $repo, 'YACT::Repository' );
+
+my $ye2013 = $yact->get_conference('ye2013');
+isa_ok( $ye2013, 'YACT::Conference' );
+
+my $ini =
+    $ye2013->repository->get_file('yact.ini')
+    ->absolute->cleanup->resolve->stringify;
+my $ye2013_ini = io($ini)->slurp;
+is( $ye2013_ini,
+    'stay_simple = 1',
+    'Config file is proper read from the test repo of ye2013'
+);
+
+my $fetched_config = $qh2012eu->config;
+delete $fetched_config->{remote};
+
+is_deeply(
+    $fetched_config,
+    {   'section_test'       => '2',
+        'section_other_test' => '1',
+        'subsection'         => {
+            'subsection_test'       => '2',
+            'subsection_other_test' => '1'
+        },
+    },
+    'Checking qh2012eu config (after removing remote)'
+);
 
 done_testing;

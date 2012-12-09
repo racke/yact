@@ -4,46 +4,47 @@ package YACT::Repository;
 
 use Moo;
 use Path::Class;
-use Git::Raw::Repository;
+use Git::Repository;
+
+has remote => ( is => 'ro', required => 1, );
+has yact   => ( is => 'ro', required => 1, );
 
 # SO FAR ONLY GIT
 has type => (
     is      => 'ro',
     lazy    => 1,
-    builder => 1,
-);
-
-sub _build_type {'git'}
-
-has remote => (
-    is       => 'ro',
-    required => 1,
-);
-
-has yact => (
-    is       => 'ro',
-    required => 1,
+    default => sub {
+        'git';
+    }
 );
 
 has _cachedir => (
     is      => 'ro',
     lazy    => 1,
-    builder => 1,
+    default => sub {
+        my ($self) = @_;
+        my $cachedir = $self->remote;
+        $cachedir =~ s/[^\w]/_/g;
+        my $dir =
+            dir( $self->yact->root, 'repos', $self->type, $cachedir )
+            ->absolute;
+        return $dir;
+    }
 );
-
-sub _build__cachedir {
-    my ($self) = @_;
-    my $cachedir = $self->remote;
-    $cachedir =~ s/[^\w]/_/g;
-    my $dir =
-        dir( $self->yact->root, 'repos', $self->type, $cachedir )->absolute;
-    return $dir;
-}
 
 sub _git {
     my ($self) = @_;
-    return Git::Raw::Repository->clone( $self->remote, $self->_cachedir,
-        { "update_missing" => 1 }, 0 );
+    Git::Repository->run( 'clone', $self->remote,
+        $self->_cachedir->stringify )
+        unless -d $self->_cachedir;
+    Git::Repository->new( work_tree => $self->_cachedir );
+}
+
+sub get_file { file( shift->_cachedir, @_ ) }
+
+sub BUILD {
+    my ($self) = @_;
+    $self->_git->run( pull => "origin", "master" ) if $self->type eq 'git';
 }
 
 1;

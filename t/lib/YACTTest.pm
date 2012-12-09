@@ -60,13 +60,22 @@ sub init {
 }
 
 sub init_test_inifiles {
-    my ($self) = @_;
+    my ($self)    = @_;
     my $confs_ini = $self->yact->config->confs_ini;
+    my $dir       = file(__FILE__)->dir;
     my $remotes_dir =
-        dir( $FindBin::Bin, "..", "remotes", "remote" )->absolute;
+        dir( $dir, "..", "remotes", "remote" )->cleanup->resolve->absolute;
     io($confs_ini)->print(<<"___END_OF_CONFS_INI___");
+main_test = 1
+
 [qh2012eu]
 remote = $remotes_dir/qh2012eu
+section_test = 1
+section_other_test = 1
+
+[qh2012eu/subsection]
+subsection_test = 1
+subsection_other_test = 1
 
 [ye2013]
 remote = $remotes_dir/ye2013

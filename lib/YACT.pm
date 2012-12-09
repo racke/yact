@@ -59,30 +59,29 @@ sub get_repository {
     );
 }
 
-sub _confs_ini {
-    my ($self) = @_;
-    if ( -f $self->config->confs_ini ) {
-        return Config::INI::Reader->read_file( $self->config->confs_ini );
-    }
-    return {};
+sub get_confs_ini {
+    Config::INI::Reader->read_file( shift->config->confs_ini );
 }
 
 sub get_conference {
-    my ( $self, $conference ) = @_;
-    die "Unknown conference " . $conference
-        unless defined $self->_confs_ini->{$conference};
-    my $config = $self->_confs_ini->{$conference};
+    my ( $self, $conf_id ) = @_;
+    die "Unknown conference " . $conf_id
+        unless defined $self->get_confs_ini->{$conf_id};
+    my $config = $self->get_confs_ini->{$conf_id};
     return YACT::Conference->new(
         yact   => $self,
         remote => $config->{remote},
-        key    => $conference,
+        defined $config->{remote_type}
+        ? ( remote_type => $config->{remote_type} )
+        : (),
+        conf_id => $conf_id,
     );
 }
 
 sub get_conferences {
     my ($self) = @_;
     my @conferences;
-    for ( sort { $a cmp $b } keys %{ $self->_confs_ini } ) {
+    for ( sort { $a cmp $b } keys %{ $self->get_confs_ini } ) {
         push @conferences, $self->get_conference($_);
     }
     return @conferences;
