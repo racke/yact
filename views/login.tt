@@ -1,41 +1,17 @@
-You are about to login to '[% path %]'
+<h1>You are about to login to '[% path %]'</h1>
 
 <form method="POST" action="/login">
-<input type="hidden" name="path" value="[% path %]">
+<div id="form">
+  <input type="hidden" name="path" value="[% path %]">
+	    <div>
+				<label for="form-credential-0">login</label>
+				<input class="input" name="user" id="form-credential-0" size="25" maxlength="60" type="text">
+			</div>
+	    <div>
+				<label for="form-credential-1">password</label>
+				<input class="input" name="pass" id="from-credential-1" size="25" maxlength="60" type="text">
 
-<table>
-
-<tr>
-   <td align="right"><label for="form-credential-0">Login</label></td>
-   <td>&nbsp;</td>
-   <td>
-      <input type="text" name="user" id="form-credential-0" size="25" maxlength="60" />
-   </td>
-</tr>
-<tr>
-   <td align="right">
-      <label for="form-credential-1">Password</label>
-   </td>
-   <td>&nbsp;</td>
-   <td>
-      <input type="password" name="pass" id="form-credential-1" size="25" maxlength="60" />
-   </td>
-</tr>
-<tr>
-   <td>&nbsp;</td>
-   <td>&nbsp;</td>
-   <td>
-      <font size="-1"><input type="checkbox" name="remember_login" id="form-credential-2" />
-      <label for="form-credential-2">Remember me on this computer</label></font>
-   </td>
-</tr>
-<tr>
-   <td colspan="3" align="right">
-      <input type="submit" name="join" value="Submit" />
-   </td>
-</tr>
-</table>
-
+			</div>
+			<input id="searchbutton" name="search" value="Log in >" type="submit">
+</div>
 </form>
-
-
