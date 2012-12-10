@@ -9,7 +9,7 @@
 			</div>
 	    <div>
 				<label for="form-credential-1">password</label>
-				<input class="input" name="pass" id="from-credential-1" size="25" maxlength="60" type="text">
+				<input class="input" name="pass" id="from-credential-1" size="25" maxlength="60" type="password">
 
 			</div>
 			<input id="searchbutton" name="search" value="Log in >" type="submit">
