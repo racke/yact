@@ -4,7 +4,7 @@
  $ dzil listdeps --author  | cpanm
  $ dzil test
 
- $ ./bin/yact-web.pl
+ $ plackup -Ilib -MYACT::Web -e'YACT::Web->run_if_script'
 
 # Perl::Tidy pre-commit hook
 

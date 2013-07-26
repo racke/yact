@@ -1,5 +1,9 @@
-use Test::More tests => 1;
+use Test::More;
 use strict;
 use warnings;
+ 
+BEGIN {
+  all_uses_ok(search_path => 'YACT');
+}
 
-use_ok 'YACT::Web';
+done_testing;
