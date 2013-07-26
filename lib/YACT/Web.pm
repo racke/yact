@@ -6,6 +6,7 @@ plugin '+YACT::Web::Plugin';
 
 r "" => sub {
   my $base = req->base;
+  text($base, "=>", ya()->config->root);
 };
 
 r "" => sub {
