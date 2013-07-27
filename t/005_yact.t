@@ -62,7 +62,7 @@ is_deeply(
             'default_country'  => 'fr',
             'timezone'         => 'Europe/Paris',
             'languages'        => 'en',
-            'full_uri'         => 'http://act.yapc.eu/qh2012eu/',
+            'full_uri'         => 'http://quackandhack.com/2012eu/',
             'name_en'          => 'Quack and Hack 2012 Europe Sample'
         },
         'levels'  => { 'level1_name_en' => 'Beginner' },
