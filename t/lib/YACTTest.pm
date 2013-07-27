@@ -3,6 +3,7 @@ use utf8;
 
 use Moo;
 use YACT;
+use YACT::Web;
 use YACT::Config;
 use File::Tempdir;
 use Path::Class;
@@ -36,6 +37,17 @@ has yact => (
 sub _build_yact {
     my ($self) = @_;
     return YACT->new( config => $self->yact_config );
+}
+
+has yact_web => (
+    is      => 'ro',
+    lazy    => 1,
+    builder => 1,
+);
+
+sub _build_yact_web {
+    my ($self) = @_;
+    return YACT::Web->new( yact => $self->yact );
 }
 
 has yact_config => (
@@ -81,7 +93,7 @@ subsection_other_test = 1
 remote = $remotes_dir/ye2013
 
 [yn2013]
-remote = $remotes_dir/yn2013
+remote = $remotes_dir/yn2013 
 
 ___END_OF_CONFS_INI___
 }

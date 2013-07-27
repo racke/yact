@@ -9,20 +9,30 @@ use YACT::Repository;
 use YACT::Conference;
 use Config::INI::Reader;
 
-sub BUILD { }
-
 has config => (
     is      => 'ro',
     lazy    => 1,
-    builder => 1,
-    handles => [
-        qw(
-            root
-            )
-    ],
+    builder => sub { YACT::Config->new },
+    handles => [qw(
+        root
+    )],
 );
 
-sub _build_config { YACT::Config->new }
+has db => (
+    is      => 'ro',
+    lazy    => 1,
+    builder => sub { YACT::DB->connect(shift) },
+);
+
+has url_bases => (
+    is      => 'ro',
+    lazy    => 1,
+    builder => sub {
+        my ( $self ) = @_;
+        my @conferences = $self->get_conferences;
+        my %url_base;
+    },
+);
 
 sub init {
     my ($self) = @_;
@@ -35,17 +45,6 @@ sub init {
         die "YACT_ROOT already exists";
     }
     $self->db->deploy;
-}
-
-has db => (
-    is      => 'ro',
-    lazy    => 1,
-    builder => 1,
-);
-
-sub _build_db {
-    my $self = shift;
-    YACT::DB->connect($self);
 }
 
 sub usercount { shift->db->resultset('User')->search( {} )->count }

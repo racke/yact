@@ -2,11 +2,18 @@ package YACT::Web;
 
 use Yeb;
 
-plugin '+YACT::Web::Plugin';
+has yact => ( is => 'ro', lazy => 1, builder => sub { YACT->new } );
+
+sub BUILD {
+  my ( $self ) = @_;
+  $self->yeb->register_function('ya',sub {
+    $self->yact;
+  });
+}
 
 r "" => sub {
   my $base = req->base;
-  text($base, "=>", ya()->config->root);
+  return;
 };
 
 r "" => sub {

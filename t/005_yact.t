@@ -17,6 +17,7 @@ my $yacttest = YACTTest->new;
 $yacttest->init;
 
 my $yact = $yacttest->yact;
+my $yact_web = $yacttest->yact_web;
 
 ok( -d $yacttest->testdir, 'Checking if dir was successful created' );
 is( $yact->root, $yacttest->testdir,
@@ -155,5 +156,7 @@ is_deeply(
     },
     'Checking user rights table of qh2012eu'
 );
+
+ok(my $res = $yact_web->run_test_request( 'GET', 'http://localhost/' ), 'response on /');
 
 done_testing;
