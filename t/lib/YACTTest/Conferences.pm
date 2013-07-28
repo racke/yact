@@ -12,69 +12,64 @@ use utf8;
 # ----------------------------------------
 
 my %conf_config = (
-  qh2012eu => {
-    'subsection' => {
-                      'subsection_other_test' => '2',
-                      'subsection_other_other_test' => '2'
-                    },
-    'levels' => {
-                  'level1_name_en' => 'Beginner'
-                },
-    'payment' => {
-                   'open' => '1',
-                   'products' => 'registration',
-                   'type' => 'YEF',
-                   'currency' => 'EUR',
-                   'invoices' => '0'
-                 },
-    'talks' => {
-                 'submissions_open' => '1',
-                 'durations' => '5 40',
-                 'submissions_notify_language' => 'en',
-                 'notify_accept' => '1',
-                 'start_date' => '2012-12-06 08:00:00',
-                 'levels' => '1',
-                 'edition_open' => '0',
-                 'end_date' => '2012-12-09 23:00:00',
-                 'submissions_notify_address' => 'getty@duckduckgo.com',
-                 'show_schedule' => '1'
-               },
-    'product_registration_price1' => {
-                                       'amount' => '20',
-                                       'name_en' => 'standard'
-                                     },
-    'static' => {
-                  'root' => 'http://quackandhack.com/'
-                },
-    'rooms' => {
-                 'r2_name_en' => 'Agora',
-                 'r1_name_en' => 'Classe numerique',
-                 'rooms' => 'r1 r2'
-               },
-    'registration' => {
-                        'open' => '1',
-                        'max_attendees' => '3',
-                        'gratis' => '0'
-                      },
-    'flickr' => {
-                  'tags' => 'qh2012eu'
-                },
-    'general' => {
-                   'languages' => 'en',
-                   'default_country' => 'fr',
-                   'timezone' => 'Europe/Paris',
-                   'other_conference_base' => 'http://quackandhack.com/qh2012eu/,http://quackandhack.com/eu/',
-                   'name_en' => 'Quack and Hack 2012 Europe Sample',
-                   'default_language' => 'en',
-                   'conference_base' => 'http://quackandhack.com/2012eu/'
-                 },
-    'product_registration' => {
-                                'name_en' => 'Registration',
-                                'prices' => '1'
-                              }
-  },
-  ye2013 => {},
-  yn2013 => {},
+    qh2012eu => {
+        'subsection' => {
+            'subsection_other_test'       => '2',
+            'subsection_other_other_test' => '2'
+        },
+        'levels'  => { 'level1_name_en' => 'Beginner' },
+        'payment' => {
+            'open'     => '1',
+            'products' => 'registration',
+            'type'     => 'YEF',
+            'currency' => 'EUR',
+            'invoices' => '0'
+        },
+        'talks' => {
+            'submissions_open'            => '1',
+            'durations'                   => '5 40',
+            'submissions_notify_language' => 'en',
+            'notify_accept'               => '1',
+            'start_date'                  => '2012-12-06 08:00:00',
+            'levels'                      => '1',
+            'edition_open'                => '0',
+            'end_date'                    => '2012-12-09 23:00:00',
+            'submissions_notify_address'  => 'getty@duckduckgo.com',
+            'show_schedule'               => '1'
+        },
+        'product_registration_price1' => {
+            'amount'  => '20',
+            'name_en' => 'standard'
+        },
+        'static' => { 'root' => 'http://quackandhack.com/' },
+        'rooms'  => {
+            'r2_name_en' => 'Agora',
+            'r1_name_en' => 'Classe numerique',
+            'rooms'      => 'r1 r2'
+        },
+        'registration' => {
+            'open'          => '1',
+            'max_attendees' => '3',
+            'gratis'        => '0'
+        },
+        'flickr'  => { 'tags' => 'qh2012eu' },
+        'general' => {
+            'languages'       => 'en',
+            'default_country' => 'fr',
+            'timezone'        => 'Europe/Paris',
+            'other_conference_base' =>
+                'http://quackandhack.com/qh2012eu/,http://quackandhack.com/eu/',
+            'name_en'          => 'Quack and Hack 2012 Europe Sample',
+            'default_language' => 'en',
+            'conference_base'  => 'http://quackandhack.com/2012eu/'
+        },
+        'product_registration' => {
+            'name_en' => 'Registration',
+            'prices'  => '1'
+        }
+    },
+    ye2013 => {},
+    yn2013 => {},
 );
 
 use Path::Class;
@@ -84,64 +79,64 @@ use Path::Class;
 use IO::All;
 use File::chdir;
 
-sub init { 
-  my ( $yact ) = @_;
-  my $fake_remotes = dir($yact->config->root,'fakeremotes');
-  mkdir $fake_remotes;
-  my %conf_ini = (
-    'qh2012eu/subsection' => {
-                               'subsection_other_test' => '1',
-                               'subsection_test' => '1'
-                             },
-    'qh2012eu' => {
-                    'section_other_test' => '1',
-                    'section_test' => '1'
-                  },
-  );
-  for my $conf_name (qw( qh2012eu ye2013 yn2013 )) {
-    my $fake_remote = dir($fake_remotes,$conf_name);
-    mkdir $fake_remote;
-    $conf_ini{$conf_name} = {} unless defined $conf_ini{$conf_name};
-    $conf_ini{$conf_name}->{remote} = $fake_remote;
-  }
-  Config::INI::Writer->write_file(\%conf_ini,file($yact->config->root,'confs.ini'));
-  for (keys %conf_ini) {
-    init_conference($yact,$conf_ini{$_}->{remote},$_) unless defined $conf_ini{$_}->{remote};
-  }
-  fill_test_database($yact);
+sub init {
+    my ($yact) = @_;
+    my $fake_remotes = dir( $yact->config->root, 'fakeremotes' );
+    mkdir $fake_remotes;
+    my %conf_ini = (
+        'qh2012eu/subsection' => {
+            'subsection_other_test' => '1',
+            'subsection_test'       => '1'
+        },
+        'qh2012eu' => {
+            'section_other_test' => '1',
+            'section_test'       => '1'
+        },
+    );
+    for my $conf_name (qw( qh2012eu ye2013 yn2013 )) {
+        my $fake_remote = dir( $fake_remotes, $conf_name );
+        mkdir $fake_remote;
+        $conf_ini{$conf_name} = {} unless defined $conf_ini{$conf_name};
+        $conf_ini{$conf_name}->{remote} = $fake_remote;
+    }
+    Config::INI::Writer->write_file( \%conf_ini,
+        file( $yact->config->root, 'confs.ini' ) );
+    for ( keys %conf_ini ) {
+        init_conference( $yact, $conf_ini{$_}->{remote}, $_ )
+            if defined $conf_ini{$_}->{remote};
+    }
+    fill_test_database($yact);
 }
 
 sub init_conference {
-  my ( $yact, $fake_remote, $conf_name ) = @_;
+    my ( $yact, $fake_remote, $conf_name ) = @_;
 
-  return unless $fake_remote;
+    my $temp = File::Tempdir->new;
 
-  my $temp = File::Tempdir->new;
+    system( "git init " . $fake_remote . " --bare" );
+    system( "git clone file://" . $fake_remote . " " . $temp->name );
 
-  system( "git init " . $fake_remote . " --bare" );
-  system( "git clone file://" . $fake_remote . " " . $temp->name );
+    Config::INI::Writer->write_file( $conf_config{$conf_name},
+        file( $temp->name, 'yact.ini' ) );
 
-  Config::INI::Writer->write_file($conf_config{$conf_name},file($temp->name,'yact.ini'));
-
-  {
-      local $CWD = $temp->name;
-      system("git add .");
-      system("git commit -m'Generated by YACTTest::Conferences'");
-      system("git push -u origin master");
-  }
+    {
+        local $CWD = $temp->name;
+        system("git add .");
+        system("git commit -m'Generated by YACTTest::Conferences'");
+        system("git push -u origin master");
+    }
 }
-
 
 #   ____        _        _
 #  |  _ \  __ _| |_ __ _| |__   __ _ ___  ___
 #  | | | |/ _` | __/ _` | '_ \ / _` / __|/ _ \
 #  | |_| | (_| | || (_| | |_) | (_| \__ \  __/
 #  |____/ \__,_|\__\__,_|_.__/ \__,_|___/\___|
-# --------------------------------------------- 
+# ---------------------------------------------
 
 sub fill_test_database {
     my ($yact) = @_;
-    my $db     = $yact->db;
+    my $db = $yact->db;
     scalar $db->populate(
         'User',
         [

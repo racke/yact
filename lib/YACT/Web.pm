@@ -17,8 +17,6 @@ sub BUILD {
 r "" => sub {
     my $base = req->base;
     my $urls = ya()->url_bases;
-    use DDP;
-    p($urls);
     return;
 };
 
