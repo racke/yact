@@ -13,9 +13,11 @@ has config => (
     is      => 'ro',
     lazy    => 1,
     builder => sub { YACT::Config->new },
-    handles => [qw(
-        root
-    )],
+    handles => [
+        qw(
+            root
+            )
+    ],
 );
 
 has db => (
@@ -28,9 +30,13 @@ has url_bases => (
     is      => 'ro',
     lazy    => 1,
     builder => sub {
-        my ( $self ) = @_;
+        my ($self) = @_;
+        my %urls;
         my @conferences = $self->get_conferences;
-        my %url_base;
+        for (@conferences) {
+
+        }
+        return \%urls;
     },
 );
 

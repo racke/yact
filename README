@@ -4,7 +4,13 @@
  $ dzil listdeps --author  | cpanm
  $ dzil test
 
- $ plackup -Ilib -MYACT::Web -e'YACT::Web->run_if_script'
+Best is then setting up a dev environment of the data:
+
+ $ perl -Ilib -It/lib -MYACTTest -e'YACTTest->new( testdir => $ENV{HOME}."/yact_test" )->init'
+
+Then you can use the directory via YAPC_ROOT like this:
+
+ $ YAPC_ROOT=/home/user/yact_test plackup -Ilib -MYACT::Web -e'YACT::Web->run_if_script'
 
 # Perl::Tidy pre-commit hook
 
