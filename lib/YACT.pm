@@ -31,12 +31,14 @@ has url_bases => (
     lazy    => 1,
     builder => sub {
         my ($self) = @_;
-        my %urls;
+        my %url_bases;
         my @conferences = $self->get_conferences;
-        for (@conferences) {
-
+        for my $conf (@conferences) {
+            for my $base ( keys %{ $conf->url_bases } ) {
+                $url_bases{$base} = $conf->url_bases->{$base};
+            }
         }
-        return \%urls;
+        return \%url_bases;
     },
 );
 

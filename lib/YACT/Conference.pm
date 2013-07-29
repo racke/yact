@@ -50,6 +50,16 @@ sub config {
         [@repo_inis] )->data;
 }
 
+sub url_bases {
+    my ($self) = @_;
+    my %url_bases;
+    my $base = $self->config->{general}->{conference_base};
+    if ($base) {
+        $url_bases{$base} = $self;
+    }
+    return \%url_bases;
+}
+
 sub add_participation {
     my ( $self, $user, $tshirt, $nb_family ) = @_;
     $self->yact->db->resultset('Participation')->create(

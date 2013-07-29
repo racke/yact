@@ -16,7 +16,7 @@ my $yacttest = YACTTest->new;
 
 $yacttest->init;
 
-my $yact = $yacttest->yact;
+my $yact     = $yacttest->yact;
 my $yact_web = $yacttest->yact_web;
 
 ok( -d $yacttest->testdir, 'Checking if dir was successful created' );
@@ -157,6 +157,13 @@ is_deeply(
     'Checking user rights table of qh2012eu'
 );
 
-ok(my $res = $yact_web->run_test_request( 'GET', 'http://localhost/' ), 'response on /');
+ok( my $lh = $yact_web->run_test_request( 'GET', 'http://localhost/' ),
+    'response on http://localhost/' );
+
+ok( my $qh = $yact_web->run_test_request(
+        'GET', 'http://quackandhack.com/2012eu/'
+    ),
+    'response on http://quackandhack.com/2012eu/'
+);
 
 done_testing;

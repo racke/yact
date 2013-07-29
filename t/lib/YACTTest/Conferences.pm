@@ -58,10 +58,10 @@ my %conf_config = (
             'default_country' => 'fr',
             'timezone'        => 'Europe/Paris',
             'other_conference_base' =>
-                'http://quackandhack.com/qh2012eu/,http://quackandhack.com/eu/',
+                'http://quackandhack.com/qh2012eu,http://quackandhack.com/eu',
             'name_en'          => 'Quack and Hack 2012 Europe Sample',
             'default_language' => 'en',
-            'conference_base'  => 'http://quackandhack.com/2012eu/'
+            'conference_base'  => 'http://quackandhack.com/2012eu'
         },
         'product_registration' => {
             'name_en' => 'Registration',
