@@ -1,11 +1,11 @@
 #!/usr/bin/env perl
 
-use Test::More;
 use strict;
 use warnings;
- 
+use Test::LoadAllModules;
+
 BEGIN {
-  all_uses_ok(search_path => 'YACT');
+    all_uses_ok( search_path => 'YACT' );
 }
 
-done_testing;
+1;
