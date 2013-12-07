@@ -5,7 +5,7 @@ package YACT::DB;
 use Moo;
 extends 'DBIx::Class::Schema';
 
-__PACKAGE__->load_namespaces;
+__PACKAGE__->load_namespaces( default_resultset_class => 'ResultSet', );
 
 has _yact => ( is => 'rw', );
 sub yact { shift->_yact }

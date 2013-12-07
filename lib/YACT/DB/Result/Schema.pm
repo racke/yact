@@ -1,31 +1,11 @@
 package YACT::DB::Result::Schema;
 
-=head1 NAME
+use Moo;
+extends 'YACT::DB::Result';
+use DBIx::Class::Candy;
 
-YACT::DB::Result::Schema
+table "schema";
 
-=cut
-
-use DBIx::Class::Candy -components => [
-    'TimeStamp',                 'InflateColumn::DateTime',
-    'InflateColumn::Serializer', 'EncodedColumn'
-];
-
-=head1 TABLE: C<schema>
-
-=cut
-
-table("schema");
-
-=head1 ACCESSORS
-
-=head2 current_version
-
-  data_type: 'integer'
-  is_nullable: 0
-
-=cut
-
-column "current_version", { data_type => "integer", is_nullable => 0 };
+column current_version => { data_type => "integer", is_nullable => 0 };
 
 1;
